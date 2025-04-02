@@ -1,0 +1,27 @@
+package org.example.service;
+
+import lombok.RequiredArgsConstructor;
+import org.example.model.Requisites;
+import org.example.repository.RequisitesRepository;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.UUID;
+
+@Service
+@RequiredArgsConstructor
+public class RequisitesTransaction {
+ private final RequisitesRepository requisitesRepository;
+
+public List<Requisites> readAll() {
+    return requisitesRepository.findAll();
+}
+public Requisites readById(String externalId) {
+ return requisitesRepository.findByExternalId(externalId);
+}
+public Requisites savedRequisites(Requisites requisites) {
+    return requisitesRepository.save(requisites);
+}
+
+}
+

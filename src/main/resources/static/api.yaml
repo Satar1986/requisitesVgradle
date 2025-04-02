@@ -1,0 +1,86 @@
+openapi: 3.0.1
+info:
+  title: Requisites API
+  version: '1.0'
+servers:
+  - url: http://localhost:8086
+    description: Dev server
+paths:
+  /requisites:
+    get:
+      summary: Получение всех requisites
+      operationId: getRequisites
+      tags:
+        - requisites
+      responses:
+        '200':
+          description: Список реквизитов
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/Requisites"
+  /requisites/{externalId}:
+    get:
+      summary: Получение requisites по externalId
+      operationId: getRequisitesById
+      tags:
+        - requisites
+      parameters:
+        - name: externalId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Реквизиты
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Requisites"
+components:
+  schemas:
+    Requisites:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        externalId:
+          type: string
+        client_id:
+          type: string
+        name_company:
+          type: string
+        inn:
+          type: integer
+          format: int64
+        kpp:
+          type: integer
+          format: int32
+        ogrn:
+          type: integer
+          format: int64
+        business_address:
+          type: string
+        address:
+          type: string
+        rcbic:
+          type: integer
+          format: int32
+        corr_ass:
+          type: number
+          format: float
+        ass:
+          type: number
+          format: float
+        bank_name:
+          type: string
+        created:
+          type: string
+          format: date-time
+        updated:
+          type: string
+          format: date-time

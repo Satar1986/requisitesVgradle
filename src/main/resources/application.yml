@@ -1,0 +1,33 @@
+server:
+  port: 8086
+springdoc:
+  swagger-ui:
+    url: /api.yaml
+    path: /api.html
+spring:
+  liquibase:
+    enabled: true
+  datasource:
+    url: jdbc:postgresql://localhost:5432/requisitesV1.1
+    username: postgres
+    password: root
+  jpa:
+    hibernate:
+      ddl-auto: none
+  kafka:
+    consumer:
+      bootstrap-servers: localhost:9092
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+      group-id: "test-consumer-group"
+      properties:
+        spring:
+          deserializer:
+            value:
+              delegate:
+                class: org.springframework.kafka.support.serializer.JsonDeserializer
+          json:
+            trusted:
+              packages: "*"
+
+

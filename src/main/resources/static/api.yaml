@@ -72,10 +72,10 @@ components:
           format: int32
         corr_ass:
           type: number
-          format: float
+          format: double
         ass:
           type: number
-          format: float
+          format: double
         bank_name:
           type: string
         created:

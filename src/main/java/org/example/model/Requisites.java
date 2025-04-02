@@ -38,9 +38,9 @@ public class Requisites  {
     @Column(name = "rcbic", nullable = false)
     private Integer rcbic;
     @Column(name = "corr_ass", nullable = false)
-    private Float corr_ass;
+    private Double corr_ass;
     @Column(name = "ass",nullable = false)
-    private Float ass;
+    private Double ass;
     @Column(name = "bank_name",nullable = false,length = 50)
     private String bank_name;
     @Column(name = "created_time")

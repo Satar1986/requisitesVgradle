@@ -1,11 +1,10 @@
 package org.example.event;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Setter
 @Getter
+@Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class EventRequisites {
@@ -18,7 +17,7 @@ public class EventRequisites {
     private String business_address;
     private String address;
     private Integer rcbic;
-    private Float corr_ass;
-    private Float ass;
+    private Double corr_ass;
+    private Double ass;
     private String bank_name;
 }

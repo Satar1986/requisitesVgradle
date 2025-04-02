@@ -17,12 +17,12 @@ private final Logger logger = LoggerFactory.getLogger(RequisitesHandler.class);
 private final RequisitesProcessService requisitesProcessService;
 @KafkaListener(topics = "Account_requisites")
 public void handle(@Payload EventRequisites eventRequisites,
-                   @Header("externalId")String externalId) {
-logger.info("Received event: {}", eventRequisites.getExternalId());
-
-try {
-requisitesProcessService.processRequisites(eventRequisites);
-}catch (Exception e) {
-    logger.error(e.getMessage());}
-}
+                   @Header("externalId")String externalId
+) {
+         logger.info("Received event: {}", eventRequisites.getExternalId());
+         try {
+             requisitesProcessService.processRequisites(eventRequisites);
+         }catch (Exception e) {
+             logger.error(e.getMessage());}
+    }
 }

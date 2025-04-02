@@ -1,10 +1,8 @@
 package org.example.model;
 
-
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.UuidGenerator;
-
 
 import java.util.Date;
 import java.util.UUID;

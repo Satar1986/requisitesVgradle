@@ -1,26 +1,19 @@
 package org.example.controller;
 
-
-
-
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import lombok.RequiredArgsConstructor;
-
 import org.example.dto.ApiDto;
 import org.example.service.MappingApi;
 import org.openapi.example.model.Requisites;
-
 import org.openapi.example.api.RequisitesApi;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-
 import java.util.*;
 import java.util.stream.Collectors;
-
 
 @RestController
 @RequiredArgsConstructor
@@ -30,18 +23,22 @@ import java.util.stream.Collectors;
      @Override
 public ResponseEntity<List<Requisites>> getRequisites() {
          List<ApiDto> apiDtos=mappingApi.getRequisitesApiIds();
-         List<Requisites> requisitesList=apiDtos.parallelStream().map(apiDto -> getRequisites(apiDto)).collect(Collectors.toList());
-         return new  ResponseEntity<>(requisitesList ,HttpStatus.OK);}
+         List<Requisites> requisitesList=apiDtos.parallelStream().map(this::getRequisites).
+                 collect(Collectors.toList());
+         return new  ResponseEntity<>(requisitesList ,HttpStatus.OK);
+     }
 
-      @Override
-public ResponseEntity<Requisites> getRequisitesById(@Parameter(name = "externalId", description = "Requisites",
+     @Override
+public ResponseEntity<Requisites> getRequisitesById(@Parameter(name = "externalId",
+              description = "Requisites",
         required = true, in = ParameterIn.PATH)
                                                     @PathVariable("externalId") String externalId) {
     ApiDto apiDto=mappingApi.getRequisitesApiId(externalId);
     Requisites requisites= getRequisites(apiDto);
-    return  new ResponseEntity<>(requisites, HttpStatus.OK);}
+    return  new ResponseEntity<>(requisites, HttpStatus.OK);
+     }
 
-    public Requisites getRequisites(ApiDto apiDto){
+     public Requisites getRequisites(ApiDto apiDto){
         Requisites requisites=new Requisites();
         requisites.setExternalId(apiDto.getExternalId());
         requisites.setId(apiDto.getId());

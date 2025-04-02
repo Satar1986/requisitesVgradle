@@ -1,16 +1,12 @@
 package org.example.service;
 
-
 import lombok.RequiredArgsConstructor;
 import org.example.dto.ApiDto;
 import org.example.model.Requisites;
 import org.springframework.stereotype.Service;
 
-
 import java.util.List;
-
 import java.util.stream.Collectors;
-
 
 @Service
 @RequiredArgsConstructor
@@ -21,11 +17,10 @@ public class MappingApi {
             ApiDto apiDto = getRequisites(requisites);
         return apiDto;
     }
-
     public List<ApiDto> getRequisitesApiIds() {
         List<Requisites> requisitesList = requisitesTransaction.readAll();
-        List<ApiDto> apiDtos = requisitesList.parallelStream().map(requisites ->getRequisites(requisites)).collect(Collectors.toList());
-
+        List<ApiDto> apiDtos = requisitesList.parallelStream().map(this::getRequisites).
+                collect(Collectors.toList());
     return apiDtos;
     }
     public ApiDto getRequisites(Requisites requisites){

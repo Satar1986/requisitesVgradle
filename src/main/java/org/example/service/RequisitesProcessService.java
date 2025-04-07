@@ -12,34 +12,34 @@ public class RequisitesProcessService {
 public void processRequisites(EventRequisites eventRequisites) {
  Requisites requisites=requisitesTransaction.readById(eventRequisites.getExternalId());
      if (requisites!=null) {
-          requisites.setClient_id(eventRequisites.getClient_id());
+          requisites.setClientId(eventRequisites.getClientId());
           requisites.setExternalId(eventRequisites.getExternalId());
           requisites.setAddress(eventRequisites.getAddress());
-          requisites.setBusiness_address(eventRequisites.getBusiness_address());
+          requisites.setBusinessAddress(eventRequisites.getBusinessAddress());
           requisites.setAss(eventRequisites.getAss());
-          requisites.setCorr_ass(eventRequisites.getCorr_ass());
-          requisites.setBank_name(eventRequisites.getBank_name());
+          requisites.setCorrAss(eventRequisites.getCorrAss());
+          requisites.setBankName(eventRequisites.getBankName());
           requisites.setKpp(eventRequisites.getKpp());
           requisites.setInn(eventRequisites.getInn());
           requisites.setOgrn(eventRequisites.getOgrn());
           requisites.setRcbic(eventRequisites.getRcbic());
-          requisites.setName_company(eventRequisites.getName_company());
-Requisites savedRequisites = requisitesTransaction.savedRequisites(requisites);
+          requisites.setNameCompany(eventRequisites.getNameCompany());
+Requisites savedRequisites = requisitesTransaction.savedRequisites(requisites,eventRequisites.getRequisitesId());
 }else {
           Requisites requisites1 = Requisites.builder().
-                  client_id(eventRequisites.getClient_id()).
+                  clientId(eventRequisites.getClientId()).
                   externalId(eventRequisites.getExternalId()).
                   address(eventRequisites.getAddress()).
-                  business_address(eventRequisites.getBusiness_address()).
+                  businessAddress(eventRequisites.getBusinessAddress()).
                   ass(eventRequisites.getAss()).
-                  corr_ass(eventRequisites.getCorr_ass()).
-                  bank_name(eventRequisites.getBank_name()).
+                  corrAss(eventRequisites.getCorrAss()).
+                  bankName(eventRequisites.getBankName()).
                   kpp(eventRequisites.getKpp()).
                   inn(eventRequisites.getInn()).
                   ogrn(eventRequisites.getOgrn()).
                   rcbic(eventRequisites.getRcbic()).
-                  name_company(eventRequisites.getName_company()).build();
-          Requisites savedRequisites = requisitesTransaction.savedRequisites(requisites1);
+                  nameCompany(eventRequisites.getNameCompany()).build();
+          Requisites savedRequisites = requisitesTransaction.savedRequisites(requisites1,eventRequisites.getRequisitesId());
      }
   }
 }

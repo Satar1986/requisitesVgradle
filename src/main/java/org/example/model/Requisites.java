@@ -1,17 +1,24 @@
 package org.example.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.Accessors;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.UuidGenerator;
-
 import java.util.Date;
 import java.util.UUID;
 
 @Entity
 @Data
 @Builder
+@DynamicInsert
+@DynamicUpdate
+@Table(name = "requisites")
 @NoArgsConstructor
 @AllArgsConstructor
+@Accessors(chain = true)
 public class Requisites  {
 
     @Id
@@ -22,9 +29,9 @@ public class Requisites  {
     @Column(name = "external_id", nullable = false,length = 50)
     private String externalId;
     @Column(name = "client_id",nullable = false,length = 20)
-    private String client_id;
+    private String clientId;
     @Column(name = "name_company", nullable = false,length = 50)
-    private String name_company;
+    private String nameCompany;
     @Column(name = "inn", nullable = false)
     private Long inn;
     @Column(name = "kpp", nullable = false)
@@ -32,17 +39,17 @@ public class Requisites  {
     @Column(name = "ogrn", nullable = false)
     private Long ogrn;
     @Column(name = "business_address", nullable = false, length = 100)
-    private String business_address;
+    private String businessAddress;
     @Column(name = "address", nullable = false, length = 100)
     private String address;
     @Column(name = "rcbic", nullable = false)
     private Integer rcbic;
     @Column(name = "corr_ass", nullable = false)
-    private Double corr_ass;
+    private Double corrAss;
     @Column(name = "ass",nullable = false)
     private Double ass;
     @Column(name = "bank_name",nullable = false,length = 50)
-    private String bank_name;
+    private String bankName;
     @Column(name = "created_time")
     private Date created;
     @PrePersist
@@ -55,7 +62,10 @@ public class Requisites  {
     protected void onUpdate() {
         updated = new Date();
     }
-
+    @JsonIgnore
+    @ManyToOne(cascade = CascadeType.MERGE,fetch = FetchType.LAZY)
+    @JoinColumn(name = "requisites_id",referencedColumnName = "id")
+    private Client client;
 
 }
 

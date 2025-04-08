@@ -1,6 +1,7 @@
 package org.example.handler;
 
 import lombok.RequiredArgsConstructor;
+import org.example.event.AccountEvent;
 import org.example.event.EventRequisites;
 import org.example.service.RequisitesProcessService;
 import org.slf4j.Logger;
@@ -24,5 +25,10 @@ public void handle(@Payload EventRequisites eventRequisites,
              requisitesProcessService.processRequisites(eventRequisites);
          }catch (Exception e) {
              logger.error(e.getMessage());}
+    }
+    @KafkaListener(topics = "Account_requisites")
+    public void handleAccount(@Payload AccountEvent accountEvent,
+                              @Header("externalId")String externalId) {
+    logger.info("Received event: {}", accountEvent.getExternalId());
     }
 }

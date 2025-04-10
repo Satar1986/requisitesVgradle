@@ -32,7 +32,8 @@ public ResponseEntity<Client> getClientById(@Parameter(name = "id", description 
 }
 public Client getClient(org.example.model.Client clientEntity) {
     List<Requisites> requisitesList=clientEntity.getRequisitesList();
-    List<org.openapi.example.model.Requisites>list=requisitesList.stream().map(this::getRequisites).collect(Collectors.toList());
+    List<org.openapi.example.model.Requisites>list=requisitesList.stream().map(this::getRequisites).
+            collect(Collectors.toList());
     Client client=new Client();
     client.setId(clientEntity.getId());
     client.setName(clientEntity.getName());

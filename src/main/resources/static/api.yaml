@@ -105,10 +105,8 @@ components:
           format: int32
         corrAss:
           type: number
-          format: double
         ass:
           type: number
-          format: double
         bankName:
           type: string
         created:

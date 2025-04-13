@@ -7,6 +7,8 @@ import lombok.experimental.Accessors;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.UuidGenerator;
+
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.UUID;
 
@@ -45,9 +47,9 @@ public class Requisites  {
     @Column(name = "rcbic", nullable = false)
     private Integer rcbic;
     @Column(name = "corr_ass", nullable = false)
-    private Double corrAss;
-    @Column(name = "ass",nullable = false)
-    private Double ass;
+    private BigDecimal corrAss;
+    @Column(name = "ass", nullable = false)
+    private BigDecimal ass;
     @Column(name = "bank_name",nullable = false,length = 50)
     private String bankName;
     @Column(name = "created_time")

@@ -55,12 +55,13 @@ openApiGenerate {
 			useSpringBoot3: 'true',
 			interfaceOnly: 'true',
 			dateLibrary: 'custom',
+			bigDecimalAsString: 'true'
 	)
 	typeMappings.set(
-			typeMapping: 'OffsetDataTime=Date',
+			typeMappings: 'OffsetDataTime=Date'
 	)
 	importMappings.set(
-			importMapping: 'import java.time.OffsetDateTime=import java.util.Date'
+			importMappings: 'import java.time.OffsetDateTime=import java.util.Date'
 	)
 	compileJava.dependsOn tasks.openApiGenerate
 }
